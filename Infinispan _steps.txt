@@ -10,7 +10,7 @@ start : ./cli.sh or ./cli.bat
 create user : ./cli.bat user create admin -p admin -g admin
 4. create cache in infinispan.xml file
 location : ../server/cfgs/infinispan.xml file
-<local-cache name="ALTERNATE_PAYMENT_DETAILS">
+<local-cache name="Student">
 
 	<encoding media-type="application/x-protostream"/>
 
@@ -26,7 +26,7 @@ location : ../server/cfgs/infinispan.xml file
 
 		<indexed-entities>
 
-			<indexed-entity>com.auruspay.infinispan.pojo.AlternatePaymentDetails</indexed-entity>
+			<indexed-entity>com.infi.pojo.StudentDetails</indexed-entity>
 
 		</indexed-entities>
 
