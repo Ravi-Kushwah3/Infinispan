@@ -1,0 +1,61 @@
+Infinispan steps :
+
+1. Download infinispan server
+2. unzip folder and start server from 
+location : ../infinispan.15.0.1.Final/bin
+start : ./server.sh or ./server.bat
+3. to create admin to access ui on port localhost:11222 in browser
+location : ../infinispan.15.0.1.Final/bin
+start : ./cli.sh or ./cli.bat
+create user : ./cli.bat user create admin -p admin -g admin
+4. create cache in infinispan.xml file
+location : ../server/cfgs/infinispan.xml file
+<local-cache name="ALTERNATE_PAYMENT_DETAILS">
+
+	<encoding media-type="application/x-protostream"/>
+
+	<locking concurrency-level="1000" acquire-timeout="60000" striping="true"/>
+
+	<transaction mode="NONE"/>
+
+	<indexing enabled="true" storage="local-heap" indexing-mode="MANUAL">
+
+		<index-reader/>
+
+		<index-writer queue-size="10000" thread-pool-size="50" ram-buffer-size="1024"/>
+
+		<indexed-entities>
+
+			<indexed-entity>com.auruspay.infinispan.pojo.AlternatePaymentDetails</indexed-entity>
+
+		</indexed-entities>
+
+	</indexing>
+
+</local-cache>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
