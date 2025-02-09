@@ -33,7 +33,6 @@ public class InsertDataFromDB {
 
 	public static List<StudentDetails> insertRecords() throws SQLException {
 		List<StudentDetails> studentList = new ArrayList<StudentDetails>();
-		StudentDetails student = new StudentDetails();
 		Connection conn = null;
 		ResultSet resultSet = null;
 		PreparedStatement statement = null;
@@ -43,6 +42,7 @@ public class InsertDataFromDB {
 			statement = conn.prepareStatement(query);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
+				StudentDetails student = new StudentDetails();
 				student.setStudentAddress(resultSet.getString("studentAddress"));
 				student.setStudentAge(Float.toString(resultSet.getFloat("studentAge")));
 				student.setStudentName(resultSet.getString("studentName"));
