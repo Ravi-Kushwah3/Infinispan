@@ -11,28 +11,19 @@ start : ./cli.sh or ./cli.bat
 create user : ./cli.bat user create admin -p admin -g admin
 4. create cache in infinispan.xml file
 location : ../server/cfgs/infinispan.xml file
+5. if data not get from cache via query comment indexing tag and check again.
+
 <local-cache name="Student">
-
 	<encoding media-type="application/x-protostream"/>
-
 	<locking concurrency-level="1000" acquire-timeout="60000" striping="true"/>
-
 	<transaction mode="NONE"/>
-
 	<indexing enabled="true" storage="local-heap" indexing-mode="MANUAL">
-
 		<index-reader/>
-
 		<index-writer queue-size="10000" thread-pool-size="50" ram-buffer-size="1024"/>
-
 		<indexed-entities>
-
-			<indexed-entity>com.infi.pojo.StudentDetails</indexed-entity>
-
+			<indexed-entity>com.student.pojo.StudentDetails</indexed-entity>
 		</indexed-entities>
-
 	</indexing>
-
 </local-cache>
 
 
