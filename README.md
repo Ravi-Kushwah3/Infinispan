@@ -1,2 +1,2 @@
 # Infinispan
-Its a cache that use to perform quick operation on data insert of update.
+Its a cache that use to perform quick operation on data select,insert,update and delete.
