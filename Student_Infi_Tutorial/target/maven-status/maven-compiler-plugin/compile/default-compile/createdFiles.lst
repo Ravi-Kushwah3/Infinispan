@@ -1,0 +1,12 @@
+com\student\client\RemoteCacheFactory.class
+com\student\pojo\StudentDetails$___Marshaller_843fe3b435a807e2dddd7ad3a519e50f7f1635dbcf221a942045c6e36a02056d.class
+com\student\schema\StudentDetailsSchemaImpl.class
+com\student\dao\DBConnection.class
+com\student\constant\InfinispanConstant.class
+com\student\schema\StudentDetailsSchema.class
+com\student\constant\StringKeyMarshaller.class
+com\student\util\Utility.class
+com\student\pojo\StudentDetails.class
+com\student\client\Test.class
+META-INF\services\org.infinispan.protostream.SerializationContextInitializer
+com\student\client\InsertDataFromDB.class
