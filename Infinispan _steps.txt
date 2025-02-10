@@ -1,6 +1,7 @@
 Infinispan steps :
 
 1. Download infinispan server
+url :https://github.com/infinispan/infinispan/releases/download/15.1.1.Final/infinispan-server-15.1.1.Final.zip
 2. unzip folder and start server from 
 location : ../infinispan.15.0.1.Final/bin
 start : ./server.sh or ./server.bat
