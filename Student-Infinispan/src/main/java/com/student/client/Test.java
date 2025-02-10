@@ -12,7 +12,7 @@ import com.student.pojo.StudentDetails;
 import com.student.util.Utility;
 
 import org.infinispan.client.hotrod.Search;
-import org.infinispan.commons.api.query.Query;
+import org.infinispan.query.dsl.Query;
 import org.infinispan.query.dsl.QueryFactory;
 
 public class Test {
