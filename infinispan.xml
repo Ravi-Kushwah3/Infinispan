@@ -1,0 +1,56 @@
+<infinispan
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="urn:infinispan:config:15.0 https://infinispan.org/schemas/infinispan-config-15.0.xsd
+                            urn:infinispan:server:15.0 https://infinispan.org/schemas/infinispan-server-15.0.xsd"
+      xmlns="urn:infinispan:config:15.0"
+      xmlns:server="urn:infinispan:server:15.0">
+
+   <cache-container name="default" statistics="true">
+      <transport cluster="${infinispan.cluster.name:cluster}" stack="${infinispan.cluster.stack:tcp}" node-name="${infinispan.node.name:}"/>
+    <!--  <security>
+         <authorization/>
+      </security>  -->
+ <local-cache name="Student">
+		<encoding media-type="application/x-protostream" />
+		<locking concurrency-level="1000" acquire-timeout="60000" striping="true" />
+		<transaction mode="NONE" />
+	  	<indexing enabled="true" storage="local-heap" indexing-mode="AUTO" startup-mode="AUTO">
+		<index-reader/>
+		<index-writer queue-size="10000" thread-pool-size="50" ram-buffer-size="1024"/>
+		<indexed-entities>
+			<indexed-entity>com.student.pojo.StudentDetails</indexed-entity>
+		</indexed-entities>
+	</indexing>  
+	</local-cache>
+   </cache-container>
+
+   <server xmlns="urn:infinispan:server:15.0">
+      <interfaces>
+         <interface name="public">
+            <inet-address value="${infinispan.bind.address:127.0.0.1}"/>
+         </interface>
+      </interfaces>
+
+      <socket-bindings default-interface="public" port-offset="${infinispan.socket.binding.port-offset:0}">
+         <socket-binding name="default" port="${infinispan.bind.port:11222}"/>
+      </socket-bindings>
+
+    <!--  <security>
+         <security-realms>
+            <security-realm name="default">
+                
+               <server-identities>
+                  <ssl>
+                     <keystore path="server.pfx"
+                               password="password" alias="server"
+                               generate-self-signed-certificate-host="localhost"/>
+                  </ssl>
+               </server-identities>
+               <propertietitis-realm/>
+            </security-realm>
+         </security-realms>
+      </security>  -->
+
+      <endpoints socket-binding="default"/>
+   </server>
+</infinispan>
