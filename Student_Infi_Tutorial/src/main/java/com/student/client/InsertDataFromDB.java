@@ -82,7 +82,7 @@ public class InsertDataFromDB {
 				RemoteCache<String, StudentDetails> cache = remoteManager.getCache(InfinispanConstant.STUDENT_CACHE);
 				List<StudentDetails> studentRecords = insertRecords();
 				int count = 0;
-				if (null != studentRecords) {
+				if (studentRecords.size() > 0) {
 					LOG.info("Going to insert records in cache");
 					for (StudentDetails records : studentRecords) {
 						count++;
@@ -90,23 +90,27 @@ public class InsertDataFromDB {
 						cache.putAsync(generateKey(records), records);
 					}
 					LOG.info("Record inserted count : " + count);
-				}
-				LOG.info("Get records from cache");
-				QueryFactory qf = Search.getQueryFactory(cache);
-				// query = qf.from(StudentDetails.class).build();
-				String queryString = "FROM com.student.pojo.StudentDetails";
-				LOG.info("Query for cache : " + queryString);
-				 query = cache.query(queryString);
-				int recordFromCache = 0;
-				List<StudentDetails> student = query.list();
-				if (student.size() > 0) {
-					for (StudentDetails entry : student) {
-						recordFromCache++;
-						LOG.info(entry.toString());
+
+					LOG.info("Get records from cache");
+					QueryFactory qf = Search.getQueryFactory(cache);
+					// query = qf.from(StudentDetails.class).build();
+					String queryString = "FROM com.student.pojo.StudentDetails";
+					LOG.info("Query for cache : " + queryString);
+					// query = cache.query(queryString);
+					int recordFromCache = 0;
+					List<StudentDetails> student = query.list();
+					if (student.size() > 0) {
+						for (StudentDetails entry : student) {
+							recordFromCache++;
+							LOG.info(entry.toString());
+						}
+						LOG.info("Total records from cache : " + recordFromCache);
+					} else {
+
 					}
-					LOG.info("Total records from cache : " + recordFromCache);
+					LOG.info("Record not found in cache");
 				} else {
-					LOG.info("Record not found");
+					LOG.info("Records are not available in database");
 				}
 
 			} else {
@@ -116,5 +120,5 @@ public class InsertDataFromDB {
 		} catch (Exception e) {
 			LOG.error("Exception in createConnection : ", e);
 		}
-	}
+	} 
 }
