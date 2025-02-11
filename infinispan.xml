@@ -22,6 +22,14 @@
 		</indexed-entities>
 	</indexing>  
 	</local-cache>
+	       <local-cache name="test">
+    <encoding media-type="application/x-protostream"/>
+   <persistence passivation="false">
+    <file-store>
+      <data path="/home/rkushwah/INFI15/infinispan-server-15.1.1.Final/server/data/infidata.data" />
+    </file-store>
+   </persistence>
+  </local-cache>
    </cache-container>
 
    <server xmlns="urn:infinispan:server:15.0">
