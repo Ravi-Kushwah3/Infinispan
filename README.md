@@ -35,4 +35,16 @@ Steps after clone project :
 	</indexing>
 </local-cache>
 
-5. configure credentials in application.properties file 
+5. configure credentials in application.properties file
+6. If you want to store data permanent in cache use this configuration.
+    <local-cache name="test">
+    <encoding media-type="application/x-protostream"/>
+   <persistence passivation="false">
+    <file-store>
+      <data path="/home/rkushwah/INFI15/infinispan-server-15.1.1.Final/server/data/infidata.data" />
+    </file-store>
+   </persistence>
+  </local-cache>
+
+
+ 
