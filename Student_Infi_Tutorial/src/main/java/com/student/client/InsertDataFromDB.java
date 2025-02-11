@@ -106,9 +106,9 @@ public class InsertDataFromDB {
 						}
 						LOG.info("Total records from cache : " + recordFromCache);
 					} else {
-
+                                               LOG.info("Record not found in cache");
 					}
-					LOG.info("Record not found in cache");
+					 
 				} else {
 					LOG.info("Records are not available in database");
 				}
