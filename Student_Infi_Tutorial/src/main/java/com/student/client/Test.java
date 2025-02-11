@@ -28,18 +28,19 @@ public class Test {
 	}
 
 	public void createConnection() {
+		 
 		try {
 			Properties prop = Utility.getInstance().getProperties();
-			LOG.info("Properties : "+prop);
+			LOG.info("Properties : " + prop);
 			String serverIP = prop.getProperty("infi_host");
-			 Query<StudentDetails> query = null;
+			Query<StudentDetails> query = null;
 			RemoteCacheFactory factory = RemoteCacheFactory.getInstance();
 			remoteManager = factory.createRemoteCacheManager(serverIP);
 			if (null != remoteManager) {
 				RemoteCache<String, StudentDetails> cache = remoteManager.getCache(InfinispanConstant.STUDENT_CACHE);
 				List<StudentDetails> studentRecords = insertRecords();
 				int count = 0;
-				if (null != studentRecords) {
+				if (studentRecords.size() > 0) {
 					LOG.info("Going to insert records in cache");
 					for (StudentDetails records : studentRecords) {
 						count++;
@@ -47,32 +48,36 @@ public class Test {
 						cache.putAsync(generateKey(records), records);
 					}
 					LOG.info("Record inserted count : " + count);
-				}
-				LOG.info("Get records from cache");
-				QueryFactory qf = Search.getQueryFactory(cache);
-				query = qf.from(StudentDetails.class).having("studentName").eq("sachin").build();
-				//String queryString = "FROM com.student.pojo.StudentDetails";
-			//	 query = cache.query(queryString);
-				LOG.info("Query for cache : " + query);
-				int recordFromCache = 0;
-				List<StudentDetails> student = query.list();
-				if (student.size() > 0) {
-					for (StudentDetails entry : student) {
-						recordFromCache++;
-						LOG.info(entry.toString());
-					}
-					LOG.info("Total records from cache : "+recordFromCache);
-				} else {
-					LOG.info("Record not found");
-				}
 
+					LOG.info("Get records from cache");
+					QueryFactory qf = Search.getQueryFactory(cache);
+					query = qf.from(StudentDetails.class).having("studentName").eq("sachin").build();
+					// String queryString = "FROM com.student.pojo.StudentDetails";
+					// query = cache.query(queryString);
+					LOG.info("Query for cache : " + query);
+					int recordFromCache = 0;
+					List<StudentDetails> student = query.list();
+					if (student.size() > 0) {
+						for (StudentDetails entry : student) {
+							recordFromCache++;
+							LOG.info(entry.toString());
+						}
+						LOG.info("Total records from cache : " + recordFromCache);
+					} else {
+						LOG.info("Record not found");
+					}
+				} else {
+					LOG.info("Record are not available for inseritng");
+				}
 			} else {
 				LOG.info("Connection not happened");
 			}
+
 		} catch (Exception e) {
 			LOG.error("Exception : " + e.getMessage());
 		}
 
+	
 	}
 
 	public static List<StudentDetails> insertRecords() {
